@@ -34,7 +34,7 @@ function Landing() {
   ];
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen">
       {/* Glowing backdrop */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-40 -end-40 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />

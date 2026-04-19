@@ -5,6 +5,7 @@ export type Camera = {
   name: { fr: string; ar: string };
   location: { fr: string; ar: string };
   status: CameraStatus;
+  type: "Indoor" | "Outdoor" | "PTZ";
   thumbnail: string;
   streamUrl: string;
 };
@@ -28,13 +29,19 @@ const SAMPLE_VIDEO_4 = "https://commondatastorage.googleapis.com/gtv-videos-buck
 
 const THUMB = (seed: string) => `https://picsum.photos/seed/${seed}/640/360?grayscale&blur=1`;
 
+import entranceThumb from "@/assets/cam-entrance.jpg";
+import courtyardThumb from "@/assets/cam-courtyard.jpg";
+import garageThumb from "@/assets/cam-garage.jpg";
+import roofThumb from "@/assets/cam-roof.jpg";
+
 export const sampleCameras: Camera[] = [
   {
     id: "cam-1",
     name: { fr: "Entrée principale", ar: "المدخل الرئيسي" },
     location: { fr: "Devant la maison", ar: "أمام المنزل" },
     status: "online",
-    thumbnail: THUMB("entry"),
+    type: "Outdoor",
+    thumbnail: entranceThumb,
     streamUrl: SAMPLE_VIDEO_1,
   },
   {
@@ -42,7 +49,8 @@ export const sampleCameras: Camera[] = [
     name: { fr: "Cour intérieure", ar: "الفناء الداخلي" },
     location: { fr: "Arrière maison", ar: "خلف المنزل" },
     status: "online",
-    thumbnail: THUMB("yard"),
+    type: "Outdoor",
+    thumbnail: courtyardThumb,
     streamUrl: SAMPLE_VIDEO_2,
   },
   {
@@ -50,16 +58,18 @@ export const sampleCameras: Camera[] = [
     name: { fr: "Garage", ar: "المرآب" },
     location: { fr: "Côté gauche", ar: "الجهة اليسرى" },
     status: "online",
-    thumbnail: THUMB("garage"),
+    type: "Indoor",
+    thumbnail: garageThumb,
     streamUrl: SAMPLE_VIDEO_3,
   },
   {
     id: "cam-4",
     name: { fr: "Toit", ar: "السطح" },
     location: { fr: "Vue panoramique", ar: "إطلالة بانورامية" },
-    status: "offline",
-    thumbnail: THUMB("roof"),
-    streamUrl: SAMPLE_VIDEO_4,
+    status: "online",
+    type: "PTZ",
+    thumbnail: roofThumb,
+    streamUrl: "https://g0.ipcamlive.com/player/player.php?alias=687771aa5fb17&autoplay=1&muted=1",
   },
 ];
 

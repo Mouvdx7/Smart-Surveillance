@@ -45,7 +45,7 @@ function LiveView() {
   const others = sampleCameras.filter((c) => c.id !== camera.id);
 
   return (
-    <div className="fixed inset-0 z-40 flex flex-col bg-background">
+    <div className="relative min-h-screen z-40 flex flex-col bg-background pb-20">
       {/* Top bar */}
       <header className="flex items-center justify-between px-4 pt-5 pb-3" style={{ paddingTop: "max(1.25rem, env(safe-area-inset-top))" }}>
         <Link
@@ -56,8 +56,8 @@ function LiveView() {
           <ChevronLeft className="h-5 w-5 rtl:rotate-180" />
         </Link>
         <div className="text-center">
-          <h1 className="text-sm font-bold">{camera.name[lang]}</h1>
-          <p className="text-[11px] text-muted-foreground">{camera.location[lang]}</p>
+          <h1 className="text-sm font-bold truncate px-2">{camera.name[lang]}</h1>
+          <p className="text-[11px] text-muted-foreground truncate px-2">{camera.location[lang]}</p>
         </div>
         <div className="flex h-10 w-10 items-center justify-center">
           <span className="flex items-center gap-1.5 rounded-full bg-destructive/90 px-2 py-1 text-[10px] font-bold uppercase">
@@ -67,18 +67,22 @@ function LiveView() {
         </div>
       </header>
 
-      {/* Video */}
-      <div className="relative mx-3 flex-1 overflow-hidden rounded-3xl border border-border/60 bg-black">
-        <video
-          ref={videoRef}
-          src={camera.streamUrl}
-          autoPlay
-          loop
-          muted={muted}
-          playsInline
-          className="h-full w-full object-cover"
-        />
-        <div className="scanline absolute inset-0" />
+      {/* Video / Live Stream */}
+      <div className="relative w-full aspect-video overflow-hidden bg-black border-y border-border/60">
+        {camera.streamUrl.includes("ipcamlive.com") ? (
+          <iframe
+            src={camera.streamUrl}
+            className="h-full w-full border-none"
+            allow="autoplay; fullscreen"
+          />
+        ) : (
+          <img
+            src={camera.thumbnail}
+            alt={camera.name[lang]}
+            className="h-full w-full object-cover opacity-80"
+          />
+        )}
+        <div className="scanline pointer-events-none absolute inset-0" />
 
         {/* Overlay HUD */}
         <div className="pointer-events-none absolute top-3 start-3 rounded-md bg-background/60 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-success backdrop-blur">
@@ -121,7 +125,7 @@ function LiveView() {
           active={recording}
           onClick={() => setRecording((v) => !v)}
         />
-        <ActionBtn icon={CameraIcon} label={t("snapshot")} onClick={() => {}} />
+        <ActionBtn icon={CameraIcon} label={t("snapshot")} onClick={() => { }} />
         <ActionBtn
           icon={muted ? MicOff : Mic}
           label={muted ? t("mute") : t("talk")}
@@ -172,11 +176,10 @@ function ActionBtn({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col items-center gap-1 rounded-2xl border py-3 transition active:scale-[0.97] ${
-        active
-          ? "border-destructive/60 bg-destructive/15 text-destructive"
-          : "border-border/60 bg-surface/50 text-foreground hover:border-primary/40"
-      }`}
+      className={`flex flex-col items-center gap-1 rounded-2xl border py-3 transition active:scale-[0.97] ${active
+        ? "border-destructive/60 bg-destructive/15 text-destructive"
+        : "border-border/60 bg-surface/50 text-foreground hover:border-primary/40"
+        }`}
     >
       <Icon className={`h-5 w-5 ${active ? "fill-destructive" : ""}`} />
       <span className="text-[11px] font-semibold">{label}</span>

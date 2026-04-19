@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import * as React from "react";
 import { ChevronRight, User, Bell, Globe2, Lock, Info, LogOut, ShieldCheck } from "lucide-react";
+import profilePic from "@/assets/profile.jpg";
 import { useI18n } from "@/i18n/useI18n";
 import type { Lang } from "@/i18n/translations";
 
@@ -25,16 +26,19 @@ function SettingsPage() {
       <h1 className="text-2xl font-bold tracking-tight">{t("settings")}</h1>
 
       {/* Profile */}
-      <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border/60 bg-surface/40 p-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-primary">
-          <User className="h-6 w-6" />
+      <Link
+        to="/app/profile"
+        className="mt-6 flex items-center gap-4 rounded-2xl border border-border/60 bg-surface/40 p-4 transition-all hover:bg-surface/60 active:scale-[0.98] cursor-pointer"
+      >
+        <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-primary/20 text-primary">
+          <img src={profilePic} alt="Mouad Anmirate" className="h-full w-full object-cover" />
         </div>
         <div className="flex-1">
-          <p className="text-sm font-semibold">Yacine B.</p>
-          <p className="text-xs text-muted-foreground">yacine@smart-surveillance.app</p>
+          <p className="text-sm font-semibold">Mouad Anmirate</p>
+          <p className="text-xs text-muted-foreground">mouadanmirate@gmail.com</p>
         </div>
         <ChevronRight className="h-4 w-4 text-muted-foreground rtl:rotate-180" />
-      </div>
+      </Link>
 
       {/* Encryption status */}
       <div className="mt-4 flex items-center gap-3 rounded-2xl border border-success/30 bg-success/5 p-4">

@@ -15,6 +15,7 @@ import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppSettingsRouteImport } from './routes/app.settings'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppCamerasRouteImport } from './routes/app.cameras'
 import { Route as AppAlertsRouteImport } from './routes/app.alerts'
 import { Route as AppLiveCameraIdRouteImport } from './routes/app.live.$cameraId'
@@ -49,6 +50,11 @@ const AppSettingsRoute = AppSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AppRoute,
 } as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCamerasRoute = AppCamerasRouteImport.update({
   id: '/cameras',
   path: '/cameras',
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/cameras': typeof AppCamerasRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/': typeof AppIndexRoute
   '/app/live/$cameraId': typeof AppLiveCameraIdRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/cameras': typeof AppCamerasRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
   '/app': typeof AppIndexRoute
   '/app/live/$cameraId': typeof AppLiveCameraIdRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/app/alerts': typeof AppAlertsRoute
   '/app/cameras': typeof AppCamerasRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/settings': typeof AppSettingsRoute
   '/app/': typeof AppIndexRoute
   '/app/live/$cameraId': typeof AppLiveCameraIdRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/app/alerts'
     | '/app/cameras'
+    | '/app/profile'
     | '/app/settings'
     | '/app/'
     | '/app/live/$cameraId'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/app/alerts'
     | '/app/cameras'
+    | '/app/profile'
     | '/app/settings'
     | '/app'
     | '/app/live/$cameraId'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/app/alerts'
     | '/app/cameras'
+    | '/app/profile'
     | '/app/settings'
     | '/app/'
     | '/app/live/$cameraId'
@@ -184,6 +196,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSettingsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/cameras': {
       id: '/app/cameras'
       path: '/cameras'
@@ -211,6 +230,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAlertsRoute: typeof AppAlertsRoute
   AppCamerasRoute: typeof AppCamerasRoute
+  AppProfileRoute: typeof AppProfileRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppIndexRoute: typeof AppIndexRoute
   AppLiveCameraIdRoute: typeof AppLiveCameraIdRoute
@@ -219,6 +239,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAlertsRoute: AppAlertsRoute,
   AppCamerasRoute: AppCamerasRoute,
+  AppProfileRoute: AppProfileRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppIndexRoute: AppIndexRoute,
   AppLiveCameraIdRoute: AppLiveCameraIdRoute,

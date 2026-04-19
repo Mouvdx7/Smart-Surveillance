@@ -72,6 +72,11 @@ export const translations = {
     nightMode: "Mode nuit",
     encryption: "Chiffrement de bout en bout",
     encryptionOn: "Activé — Vos flux sont chiffrés",
+    signal: "Signal",
+    type: "Type",
+    resolution: "Résolution",
+    uptime: "Uptime",
+    reboot: "Redémarrer",
   },
   ar: {
     appName: "المراقبة الذكية",
@@ -137,6 +142,11 @@ export const translations = {
     nightMode: "الوضع الليلي",
     encryption: "تشفير من طرف إلى طرف",
     encryptionOn: "مفعّل — بثوثك مشفّرة",
+    signal: "قوة الإشارة",
+    type: "النوع",
+    resolution: "الدقة",
+    uptime: "مدة التشغيل",
+    reboot: "إعادة التشغيل",
   },
 } as const;
 
