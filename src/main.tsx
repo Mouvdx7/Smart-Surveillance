@@ -14,7 +14,6 @@ declare module "@tanstack/react-router" {
   }
 }
 
-// In standard Vite / SPA mode, we mount directly to the #root element
 const rootElement = document.getElementById("root")!;
 
 if (!rootElement.innerHTML) {
